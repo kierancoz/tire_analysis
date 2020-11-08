@@ -1,14 +1,25 @@
 import scipy.io as sio
 from matplotlib import pyplot as plt
 import pandas as pd
+import numpy as np
 
+data = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI/B1654run21.mat")
+data2 = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI/B1654run22.mat")
 
-data = sio.loadmat("rear_tire/RawData_10inch_Cornering_Matlab_SI/B1654raw21.mat")
-data2 = sio.loadmat("rear_tire/RawData_10inch_Cornering_Matlab_SI/B1654raw22.mat")
+def clean_data(data):
+    required_length = len(data["FY"])
+    for x in list(data.keys()):
+        if len(data[x]) != required_length:
+            del data[x] # removes unnecessary data
+        else:
+            data[x] = data[x].transpose()[0] # cleans necessary data
 
-plt.plot(data["SA"], data["FY"])
-plt.show()
+clean_data(data)
+clean_data(data2)
+df = pd.concat([pd.DataFrame.from_dict(data), pd.DataFrame.from_dict(data2)])
 
-# split data based on the following criteria:
-    # FZ changes
-    #
+print(df.shape)
+print(df.head)
+
+plt.plot(df["SA"], df["FY"])
+#plt.show()
