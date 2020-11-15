@@ -3,8 +3,8 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 
-data = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI/B1654run21.mat")
-data2 = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI/B1654run22.mat")
+data = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat")
+data2 = sio.loadmat("rear_tire/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat")
 
 def clean_data(data):
     required_length = len(data["FY"])
@@ -22,4 +22,4 @@ print(df.shape)
 print(df.head)
 
 plt.plot(df["SA"], df["FY"])
-#plt.show()
+plt.show()
