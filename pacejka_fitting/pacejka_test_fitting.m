@@ -1,5 +1,5 @@
 clear
-load("temp_df2.mat")
+load("processed_data.mat")
 f = fittype('D*sin(C * atan(B * x - E * (B * (x + Sh) - atan(B * (x + Sh))))) + Sv',...
     'dependent', {'y'}, 'independent', {'x'},...
     'coefficients', {'D','B', 'E', 'C', 'Sh', 'Sv'});
@@ -11,6 +11,9 @@ options = fitoptions(f);
 options.MaxIter = 1000;
 options.StartPoint = [2625, 0.15, 0.06, -1.5, 9.4, -79.5];
 options.MaxFunEvals = 10000; 
+
+SA = load3.camber1.SA;
+FY = load3.camber1.FY;
 
 [fit1,gof,fitinfo] = fit(SA.',FY.',f,options);
 
