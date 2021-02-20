@@ -35,15 +35,15 @@ for i = 0:2
     %eval(load_name + "." + camber_name + ".fit = " + fitinfo);
     plot3(data.SA.', data.FZ.',data.FY.');
     hold on;
-    plot(fit1);
+    %plot(fit1);
     break
 end
 standard_devs
 
-test_sa = -13+0.1*(0:260);
+test_sa = -13+0.4*(0:65);
 test_fz = -20*(0:60);
 [test_SA, test_FZ] = meshgrid(test_sa, test_fz);
 
-test_y = lateralForcePajecka(test_SA, test_FZ, fit1.a1, fit1.a2, fit1.B, 0, 0.0091, 3.6353, fit1.C, fit1.Sh, fit1.Sv);
+test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv);
 surface(test_SA, test_FZ, test_y);
 
