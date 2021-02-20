@@ -1,6 +1,7 @@
 hold off;
 clc
 clear
+load("processed_data.mat");
 load("processed_data2.mat");
 
 f = fittype('(a1*fz^2 + a2*fz)*sin(C * atan(B * x - E * (B * (x + Sh) - atan(B * (x + Sh))))) + Sv',...
@@ -33,7 +34,7 @@ for i = 0:2
 
     %eval(load_name + "." + camber_name + ".sd = " + standard_dev + ";");
     %eval(load_name + "." + camber_name + ".fit = " + fitinfo);
-    plot3(data.SA.', data.FZ.',data.FY.');
+    %plot3(data.SA.', data.FZ.',data.FY.');
     hold on;
     %plot(fit1);
     break
@@ -44,6 +45,10 @@ test_sa = -13+0.4*(0:65);
 test_fz = -20*(0:60);
 [test_SA, test_FZ] = meshgrid(test_sa, test_fz);
 
-test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv);
-surface(test_SA, test_FZ, test_y);
+%test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, 1.9*10^-7, 0.000465, 0.3417, fit1.C, fit1.Sh, fit1.Sv);
+%surface(test_SA, test_FZ, test_y);
+plot(load0.camber0.SA.', load0.camber0.FY.');
+plot(test_sa, lateralForcePajecka(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, 1.9164*10^-7, 0.000465657, 0.3417, fit1.C, fit1.Sh, fit1.Sv));
+plot(test_sa, lateralForcePajecka2(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv));
+
 
