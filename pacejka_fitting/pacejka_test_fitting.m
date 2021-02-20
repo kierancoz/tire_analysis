@@ -1,3 +1,5 @@
+hold off;
+clc
 clear
 load("processed_data2.mat");
 
@@ -32,17 +34,16 @@ for i = 0:2
     %eval(load_name + "." + camber_name + ".sd = " + standard_dev + ";");
     %eval(load_name + "." + camber_name + ".fit = " + fitinfo);
     plot3(data.SA.', data.FZ.',data.FY.');
-    hold on
+    hold on;
     plot(fit1);
     break
 end
 standard_devs
-%plot(load4.camber0.SA.',load4.camber0.FY.','r')
 
+test_sa = -13+0.1*(0:260);
+test_fz = -20*(0:60);
+[test_SA, test_FZ] = meshgrid(test_sa, test_fz);
 
-% plot(fit1,'b')
-% hold on
-% test_SA = -13+0.01*(0:2600);
-%test_y = lateralForcePajecka(test_SA, fit1.D, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv);
-%plot(test_SA, test_y) 
+test_y = lateralForcePajecka(test_SA, test_FZ, fit1.a1, fit1.a2, fit1.B, 0, 0.0091, 3.6353, fit1.C, fit1.Sh, fit1.Sv);
+surface(test_SA, test_FZ, test_y);
 
