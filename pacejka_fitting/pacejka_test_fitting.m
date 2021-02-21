@@ -45,10 +45,10 @@ test_sa = -13+0.4*(0:65);
 test_fz = -20*(0:60);
 [test_SA, test_FZ] = meshgrid(test_sa, test_fz);
 
-%test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, 1.9*10^-7, 0.000465, 0.3417, fit1.C, fit1.Sh, fit1.Sv);
+%test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, -4.15847903125577e-07, -0.000565860835390739, -0.1133, fit1.C, fit1.Sh, fit1.Sv);
 %surface(test_SA, test_FZ, test_y);
-plot(load0.camber0.SA.', load0.camber0.FY.');
-plot(test_sa, lateralForcePajecka(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, 1.9164*10^-7, 0.000465657, 0.3417, fit1.C, fit1.Sh, fit1.Sv));
-plot(test_sa, lateralForcePajecka2(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv));
+%plot(load0.camber0.SA.', load0.camber0.FY.');
+%plot(test_sa, lateralForcePajecka(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, -4.15847903125577e-07, -0.000565860835390739, -0.1133, fit1.C, fit1.Sh, fit1.Sv));
+%plot(test_sa, lateralForcePajecka2(test_sa, [-1112], fit1.a1, fit1.a2, fit1.B, fit1.E, fit1.C, fit1.Sh, fit1.Sv));
 
 
