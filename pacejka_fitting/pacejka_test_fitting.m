@@ -2,9 +2,9 @@ clc
 clear
 load("processed_data2.mat");
 
-f = fittype('(a1*fz^2 + a2*fz)*sin(a0 * atan(B * x - E * (B * (x + 0) - atan(B * (x + 0))))) + 0',...
+f = fittype('(a1*fz^2 + a2*fz)*sin(a0 * atan(B * x - (4.6399e-07*fz^2 + 0.0010*fz + 0.6542) * (B * (x + Sh) - atan(B * (x + Sh))))) + Sv',...
     'dependent', {'y'}, 'independent', {'x', 'fz'},...
-    'coefficients', {'a1', 'a2', 'a0', 'B', 'E'});
+    'coefficients', {'a1', 'a2', 'a0', 'B', 'Sh', 'Sv'});
 
 % B = (a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz)))
 %f = fittype('(a1*fz^2 + a2*fz)*sin(C * atan((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * x - (a6*fz^2 + a7*fz + a8) * ((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * (x + Sh) - atan((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * (x + Sh))))) + Sv',...
@@ -13,10 +13,12 @@ f = fittype('(a1*fz^2 + a2*fz)*sin(a0 * atan(B * x - E * (B * (x + 0) - atan(B *
 
 options = fitoptions(f);
 options.MaxIter = 10000;
-options.StartPoint = [-0.0006034, -3.031, -1.608, 0.1484, 0.3817];
-options.MaxFunEvals = 10000; 
+options.StartPoint = [-0.0006034, -3.031, -1.608, 0.3817, 7, 90];
+options.MaxFunEvals = 10000;
+%options.Lower = [];
+%options.Upper = [];
 
-for i = 0:2
+for i = 2:2
     camber_name = "camber" + i;
     data = eval(camber_name);
 
@@ -29,7 +31,6 @@ for i = 0:2
     hold on;
     plot(fit1);
     %fit1.Sh
-    break
 end
 
 test_sa = -13+0.4*(0:65);
