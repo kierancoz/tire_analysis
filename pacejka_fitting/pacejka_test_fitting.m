@@ -2,23 +2,21 @@ clc
 clear
 load("processed_data2.mat");
 
-f = fittype('(a1*fz^2 + a2*fz)*sin(a0 * atan(B * x - (4.6399e-07*fz^2 + 0.0010*fz + 0.6542) * (B * (x + Sh) - atan(B * (x + Sh))))) + Sv',...
-    'dependent', {'y'}, 'independent', {'x', 'fz'},...
-    'coefficients', {'a1', 'a2', 'a0', 'B', 'Sh', 'Sv'});
-
-% B = (a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz)))
-%f = fittype('(a1*fz^2 + a2*fz)*sin(C * atan((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * x - (a6*fz^2 + a7*fz + a8) * ((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * (x + Sh) - atan((a3 * sin( a4 * atan(a5 * fz)) / (C * (a1 * fz^2 + a2 * fz))) * (x + Sh))))) + Sv',...
-%    'dependent', {'y'}, 'independent', {'x', 'fz'},...
-%    'coefficients', {'C', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'Sh', 'Sv'});
+% Verify fit is working
+f = fittype('testFitFunction(x, fz, a1, a2, B, C, D, E, F)', 'independent', {'x', 'fz'});
+% f = fittype('lateralForcePajecka(x, fz, a0, a1, a2, a3, a4, a6, a7, a8, a9, a11, a12, a17)',...
+%     'independent', {'x', 'fz'},...
+%     'coefficients', {'a0', 'a1', 'a2', 'a3', 'a4', 'a6', 'a7', 'a8', 'a9', 'a11', 'a12', 'a17'});
 
 options = fitoptions(f);
 options.MaxIter = 10000;
-options.StartPoint = [-0.0006034, -3.031, -1.608, 0.3817, 7, 90];
+%options.StartPoint = [1.2, 0, 1100, 1100, 10, 0, -2, 0, 0, 0, 0, 0];
+options.StartPoint = [0.17, -0.03, -16, 1.4, 0.014, 0, 3]
 options.MaxFunEvals = 10000;
-%options.Lower = [];
-%options.Upper = [];
+%options.Lower = [1.2, -80, 900, 500, 0, -2, -20, -1, -1, -200, -10, -1];
+%options.Upper = [1.8, 80, 1700, 2000, 50, 2, 1, 1, 1, 200, 10, 1];
 
-for i = 2:2
+for i = 0:2
     camber_name = "camber" + i;
     data = eval(camber_name);
 
@@ -28,16 +26,19 @@ for i = 2:2
     % plot 
     %eval(camber_name + ".fit = " + fitinfo);
     plot3(data.SA.', data.FZ.', data.FY.');
+    %plot(data.SA.', data.FY.');
     hold on;
     plot(fit1);
     %fit1.Sh
+    break
 end
 
-test_sa = -13+0.4*(0:65);
-test_fz = -20*(0:60);
-[test_SA, test_FZ] = meshgrid(test_sa, test_fz);
+%test_sa = -13+0.4*(0:65);
+%test_fz = zeros(size(test_sa)) - 1112;
+%[test_SA, test_FZ] = meshgrid(test_sa, test_fz);
 
-%test_y = lateralForcePajecka(test_sa, test_fz, fit1.a1, fit1.a2, fit1.B, -4.15847903125577e-07, -0.000565860835390739, -0.1133, fit1.C, fit1.Sh, fit1.Sv);
+%test_y = lateralForcePajecka(test_sa, test_fz, fit1.a0, fit1.a1, fit1.a2, fit1.a3, fit1.a4, fit1.a6, fit1.a7, fit1.a8, fit1.a9, fit1.a11, fit1.a12, fit1.a17 );
+%plot(test_sa, test_y)
 %surface(test_SA, test_FZ, test_y);
 
 
