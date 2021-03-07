@@ -4,15 +4,15 @@ load("processed_data2.mat");
 
 % Verify fit is working
 %f = fittype('testFitFunction(x, fz, a1, a2, B, C, D, E, F)', 'independent', {'x', 'fz'});
-f = fittype('lateralForcePajecka(x, fz, a0, a1, a2, a3, a7, a9, a12, a17)',...
+f = fittype('lateralForcePajecka(x, fz, a1, a3, a7, a9, a12, a17)',...
     'independent', {'x', 'fz'},...
-    'coefficients', {'a0', 'a1', 'a2', 'a3', 'a7', 'a9', 'a12', 'a17'});
+    'coefficients', {'a1', 'a3', 'a7', 'a9', 'a12', 'a17'});
 
 options = fitoptions(f);
 options.MaxIter = 10000;
-options.StartPoint = [1.2, 0, -1100, 1100, -2, 0, 0, 0];
+options.StartPoint = [2.74, -594.8, 0.8949, -0.05037, 8.788, 0.09009];
 %options.StartPoint = [0.17, -0.03, -16, 1.4, 0.014, 0, 3]
-options.MaxFunEvals = 100000;
+options.MaxFunEvals = 10000;
 %options.Lower = [1.2, -80, 900, 500, 0, -2, -20, -1, -1, -200, -10, -1];
 %options.Upper = [1.8, 80, 1700, 2000, 50, 2, 1, 1, 1, 200, 10, 1];
 

@@ -1,6 +1,6 @@
-function y = lateralForcePajecka(x, fz, a0, a1, a2, a3, a7, a9, a12, a17)
-    C = a0;
-    D = fz.*(a1.*fz+a2);
+function y = lateralForcePajecka(x, fz, a1, a3, a7, a9, a12, a17)
+    C = 1.3;
+    D = a1.*fz;
     BCD = a3; %.*sin(atan(0.00./a4).*2);
     B = BCD./(C.*D);
     H = a9;
