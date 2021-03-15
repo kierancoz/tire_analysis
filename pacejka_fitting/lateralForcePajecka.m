@@ -1,5 +1,9 @@
-function y = lateralForcePajecka(x, fz, a1, a2, a3, a4, a6, a7, a8, a9, a11, a12, a17)
-    C = 1;
+
+% first line of x & fz specifies 'I' number of input cambers
+% for each 'I' line after the first line, the 'x' will have the camber
+% value and the 'fz' will have the index the camber ends at
+function y = lateralForcePajecka(x, fz, a0, a1, a2, a3, a4, a6, a7, a8, a9, a11, a12, a17)
+    C = a0;
     D = fz.*(a1.*fz+a2);
     BCD = a3.*sin(atan(fz./a4).*2);
     B = BCD./(C.*D);
