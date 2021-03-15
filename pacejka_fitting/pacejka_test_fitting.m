@@ -7,19 +7,24 @@ f = fittype('lateralForcePajecka(x, fz, a0, a1, a2, a3, a4, a6, a7, a8, a9, a11,
     'coefficients', {'a0', 'a1', 'a2', 'a3', 'a4', 'a6', 'a7', 'a8', 'a9', 'a11', 'a12', 'a17'});
 options = fitoptions(f);
 options.MaxIter = 10000;
-options.StartPoint = [1, -0.000903, 6.424, -595.6, -1289, -0.0004771, 0.8818, 0, -0.05293, 0, 4.286, 0.02049];
+options.StartPoint = [0.01855, -0.02496, 159, -603.6, -1566,  -0.0003826, 0.9371, -2.548e-05,  -0.3335, -0.0157, -31.04, 0.01168];
 options.MaxFunEvals = 10000;
+
+combined_X = [];
+combined_Y = [];
 
 for i = 0:2
     camber_name = "camber" + i;
     data = eval(camber_name);
-    [fit1,gof,fitinfo] = fit([data.SA.' data.FZ.'], data.FY.', f, options);
-    disp("standard_dev is: " + gof.rmse);
-    
-    plot3(data.SA.', data.FZ.', data.FY.');
-    hold on;
-    break
+    combined_X = [combined_X; [data.SA.' data.FZ.']];
+    combined_Y = [combined_Y; data.FY.'];
 end
+
+[fit1,gof,fitinfo] = fit(combined_X, combined_Y, f, options);
+disp("standard_dev is: " + gof.rmse);
+
+plot3(data.SA.', data.FZ.', data.FY.');
+hold on;
 
 mesh_sa = -13+0.4*(0:65);
 mesh_fz = -20*(0:60);
