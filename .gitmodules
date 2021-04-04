@@ -1,0 +1,3 @@
+[submodule "tire_data"]
+	path = tire_data
+	url = git@github.com:kierancoz/tire_data.git
