@@ -1,18 +1,27 @@
+.PHONY: requirements update_data plot process_tire_data
+
+ifeq ($(shell uname -p), unknown) # windows
+    PYTHON := python
+    OS = windows
+else # linux
+    PYTHON := python3
+    OS = linux
+endif
 
 requirements:
 	pip install -r requirements.txt
-.PHONY : requirements
 
 # updates tire data from repo
-update_data:
+get_data:
 	git submodule init
 	git submodule update
-.PHONY : update_data
 
 # opens target jupyter notebook
 plot:
 	jupyter notebook rear_cornering_analysis.ipynb
-.PHONY : plot
+
+process_tire_data:
+	$(PYTHON) data_processing.py
 
 clean:
 	rm -r -f __pycache__/
