@@ -1,6 +1,7 @@
 import scipy.io as sio
 import numpy as np
 import pandas as pd
+import data_helpers
 
 # outputs - Rear & front cornering, long, combined data cleaned and classified
 
@@ -18,7 +19,7 @@ def main():
     for output_name, data_info in data_map.items():
         # load matlab file and convert to pandas df
         loaded_data = [sio.loadmat(file_name) for file_name in data_info["data_file_names"]]
-        df = clean_data(loaded_data)
+        df = data_helpers.import_data(loaded_data)
 
         # classify sweeps on data
         for variable, info in data_info["sweeps"].items():
@@ -31,18 +32,6 @@ def main():
 
         # export data back to matlab file
         sio.savemat(f'{output_directory}{output_name}.mat', df.to_dict("list"))
-        
-def clean_data(datas):
-    return_df = None
-    for data in datas:
-        required_length = len(data["FY"])
-        for x in list(data.keys()):
-            if len(data[x]) != required_length:
-                del data[x] # removes unnecessary data
-            else:
-                data[x] = data[x].transpose()[0] # cleans necessary data
-        return_df = pd.concat([return_df, pd.DataFrame.from_dict(data)])
-    return return_df
 
 def get_nearest_value(possible_values, input_value):
     closest_value, distance = None, 0

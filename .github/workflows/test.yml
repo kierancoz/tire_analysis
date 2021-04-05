@@ -34,3 +34,6 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      # Tests to see if it can pull down tire_data info
+        run: make get_data
