@@ -36,4 +36,7 @@ jobs:
           echo test, and deploy your project.
 
       # Tests to see if it can pull down tire_data info
-        run: make get_data
+      - name: Run make get_data
+        run: |
+          cd $(GITHUB_WORKSPACE)
+          make get_data
