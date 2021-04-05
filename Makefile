@@ -1,13 +1,12 @@
 
 requirements:
 	pip install -r requirements.txt
-	git clone git@github.com:kierancoz/tire_data.git
 .PHONY : requirements
 
 # updates tire data from repo
 update_data:
-	cd tire_data
-	git pull
+	git submodule init
+	git submodule update
 .PHONY : update_data
 
 # opens target jupyter notebook
