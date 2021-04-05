@@ -19,7 +19,7 @@ def main():
     for output_name, data_info in data_map.items():
         # load matlab file and convert to pandas df
         loaded_data = [sio.loadmat(file_name) for file_name in data_info["data_file_names"]]
-        df = data_helpers.import_data(loaded_data)
+        df = data_helpers.import_datas(loaded_data)
 
         # classify sweeps on data
         for variable, info in data_info["sweeps"].items():
