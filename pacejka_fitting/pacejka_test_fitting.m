@@ -1,8 +1,10 @@
 clc
 clear
+% requires tire_data repo to be initialized. Call make get_data in main
+% repo folder to get data. Request access if command fails
 load(fileparts(matlab.desktop.editor.getActiveFilename) + "/../tire_data/processed_data/cornering_2021_rears.mat");
 
-f = fittype('lateralForcePajecka(x, fz, ia, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)',...
+f = fittype('lateral_pacejka_eqn(x, fz, ia, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)',...
     'independent', {'x', 'fz'}, 'problem', 'ia',...
     'coefficients', {'a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17'});
 fo = fitoptions(f);
@@ -40,7 +42,7 @@ mesh_fz = -20*(0:60);
 
 for i = 1:length(mesh_ia)
     temp_IA = zeros(size(mesh_SA)) + mesh_ia(i);
-    test_y = lateralForcePajecka(mesh_SA, mesh_FZ, temp_IA, fit1.a0, fit1.a1,...
+    test_y = lateral_pacejka_eqn(mesh_SA, mesh_FZ, temp_IA, fit1.a0, fit1.a1,...
         fit1.a2, fit1.a3, fit1.a4, fit1.a5, fit1.a6, fit1.a7, fit1.a8,...
         fit1.a9, fit1.a10, fit1.a11, fit1.a12, fit1.a13, fit1.a14, fit1.a15, fit1.a16, fit1.a17);
     surf(mesh_SA, mesh_FZ, test_y);
