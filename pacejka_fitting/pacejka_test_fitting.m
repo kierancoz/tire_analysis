@@ -13,21 +13,7 @@ fo.StartPoint = [0.01843, -0.02608, 164.6,  -632.3, -1484, 0.03834,...
     -0.000409, 0.9103, -1.699e-05, -0.147, -0.1163, 0.02011, -5.764, 5.085e-05, 0.04518, 0.005372, 0.002862, 0.004312];
 fo.MaxFunEvals = 10000;
 
-% combined_X = [];
-% combined_Y = [];
-% combined_IA = [];
-
-mesh_ia = [0, 2, 4];
-% ;
-% for i = 1:length(mesh_ia)
-%     camber_name = "camber" + (i-1);
-%     data = eval(camber_name);
-%     combined_X = [combined_X; [data.SA.' data.FZ.']];
-%     combined_Y = [combined_Y; data.FY.'];
-%     combined_IA = [combined_IA; data.IA.'];
-% end
-
-% filter out unwanted pressure and velocities
+% TODO: filter out unwanted pressure and velocities
 
 [fit1,gof,fitinfo] = fit([SA.' FZ.'], FY.', f, fo, 'problem', IA.');
 disp("standard_dev is: " + gof.rmse);
@@ -39,6 +25,7 @@ mesh_sa = -13+0.4*(0:65);
 mesh_fz = -20*(0:60);
 
 [mesh_SA, mesh_FZ] = meshgrid(mesh_sa, mesh_fz);
+mesh_ia = [0, 2, 4];
 
 for i = 1:length(mesh_ia)
     temp_IA = zeros(size(mesh_SA)) + mesh_ia(i);

@@ -3,13 +3,15 @@
 ifeq ($(shell uname -p), unknown) # windows
     PYTHON := python
     OS = windows
+	PIP := pip
 else # linux
     PYTHON := python3
     OS = linux
+	PIP := pip3
 endif
 
 requirements:
-	pip install -r requirements.txt
+	$(PIP) install -r requirements.txt
 
 # updates tire data from repo
 get_data:

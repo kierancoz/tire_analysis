@@ -14,7 +14,9 @@ def main():
     output_directory = "tire_data/processed_data/"
 
     data_map = {"cornering_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
-                "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps}}
+                "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
+                "braking_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run38.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg" : False}}
 
     for output_name, data_info in data_map.items():
         # load matlab file and convert to pandas df
@@ -27,8 +29,9 @@ def main():
             df[variable] = df[info["label"]].apply(temp_nearest_func)
 
         # period of oscillation is ~ 10.5 data points, remove oscillation
-        for target_var in ["FY", "FX", "FZ"]:
-            df[target_var] = moving_average(df[target_var], 10)
+        if data_info["avg"]:
+            for target_var in ["FY", "FX", "FZ"]:
+                df[target_var] = moving_average(df[target_var], 10)
 
         # export data back to matlab file
         sio.savemat(f'{output_directory}{output_name}.mat', df.to_dict("list"))
