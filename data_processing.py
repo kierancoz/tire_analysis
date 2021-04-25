@@ -11,12 +11,18 @@ def main():
                     "pressure" : {"sweep" : np.array([8, 10, 12, 14]) * 6.89476, "label" : "P"},
                     "velocity" : {"sweep" : np.array([15, 25, 45]) * 1.60934, "label" : "V"}}
 
+    braking_variable_sweeps = {"load" : {"sweep" : np.array([-250, -200, -150, -50]) / 0.224809, "label" : "FZ" },
+                "camber" : {"sweep" : np.array([0, 2, 4]), "label" : "IA"},
+                "pressure" : {"sweep" : np.array([8, 10, 12, 14]) * 6.89476, "label" : "P"},
+                "velocity" : {"sweep" : np.array([25]) * 1.60934, "label" : "V"},
+                "slip" : {"sweep" : np.array([0, -3, -6]), "label" : "SA"}}
+
     output_directory = "tire_data/processed_data/"
 
     data_map = {"cornering_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
                 "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
                 "braking_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run38.mat"],
-                "sweeps" : cornering_variable_sweeps, "avg" : False}}
+                "sweeps" : braking_variable_sweeps, "avg" : False}}
 
     for output_name, data_info in data_map.items():
         # load matlab file and convert to pandas df
