@@ -1,6 +1,6 @@
 clc
 clear
-% requires tire_data repo to be initialized. Call make get_data in main
+% requires tire_data repo to be initialized. run 'make get_data' in
 % repo folder to get data. Request access if command fails
 load(fileparts(matlab.desktop.editor.getActiveFilename) + "/../tire_data/processed_data/cornering_2021_rears.mat");
 
@@ -13,12 +13,28 @@ fo.StartPoint = [0.01843, -0.02608, 164.6,  -632.3, -1484, 0.03834,...
     -0.000409, 0.9103, -1.699e-05, -0.147, -0.1163, 0.02011, -5.764, 5.085e-05, 0.04518, 0.005372, 0.002862, 0.004312];
 fo.MaxFunEvals = 10000;
 
-% TODO: filter out unwanted pressure and velocities
+% filter out unwanted pressure and velocities
+req_SA = [];
+req_FZ = [];
+req_FY = [];
+req_IA = [];
 
-[fit1,gof,fitinfo] = fit([SA.' FZ.'], FY.', f, fo, 'problem', IA.');
+unique_vels = [40.2335, 24.1401, 72.4203];
+unique_press = [82.73712, 68.9476, 96.5266, 55.1581];
+for i = 1:length(FZ)
+    if any(1==find(unique_vels==velocity(1,i))) && any(1==find(unique_press==pressure(1,i)))
+        req_SA(end+1) = SA(1, i);
+        req_FZ(end+1) = FZ(1, i);
+        req_FY(end+1) = FY(1, i);
+        req_IA(end+1) = IA(1, i);
+    end
+end
+
+% fit data
+[fit1,gof,fitinfo] = fit([req_SA.' req_FZ.'], req_FY.', f, fo, 'problem', req_IA.');
 disp("standard_dev is: " + gof.rmse);
 
-plot3(SA.', FZ.', FY.');
+plot3(req_SA.', req_FZ.', req_FY.');
 hold on;
 
 mesh_sa = -13+0.4*(0:65);
