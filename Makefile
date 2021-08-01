@@ -1,4 +1,4 @@
-.PHONY: requirements update_data plot process_tire_data
+.PHONY: requirements update_data plot process_tire_data matlab_fit
 
 ifeq ($(shell uname -p), unknown) # windows
     PYTHON := python
@@ -24,6 +24,11 @@ plot:
 
 process_tire_data:
 	$(PYTHON) data_processing.py
+
+matlab_fit:
+	cd pacejka_fitting
+	matlab -batch "fitting_cornering_2021_rear()"
+	cd ..
 
 clean:
 	rm -r -f __pycache__/
