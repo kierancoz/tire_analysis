@@ -1,6 +1,6 @@
 classdef lateral_pacejka
     methods (Static)
-        function force = call_1(x, fz, ia, a0, a2, a3, a4, a7, a12, a9) 
+        function force = call_1(x, fz, ia, a0, a2, a3, a4, a7, a9, a12) 
             C = a0;
             D = fz.*a2;
             BCD = a3.*sin(atan(fz./a4).*2);
@@ -12,7 +12,7 @@ classdef lateral_pacejka
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
         % add all aditional load dependent terms
-        function force = call_2(x, fz, ia, a0, a2, a3, a4, a7, a12, a9, a1, a6, a8, a11) 
+        function force = call_2(x, fz, ia, a0, a2, a3, a4, a7, a9, a12, a1, a6, a8, a11) 
             C = a0;
             D = fz.*(a1.*fz+a2);
             BCD = a3.*sin(atan(fz./a4).*2);
@@ -24,7 +24,7 @@ classdef lateral_pacejka
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
         % add additional slip angle term (finish Curvature factor E)
-        function force = call_3(x, fz, ia, a0, a2, a3, a4, a7, a12, a9, a1, a6, a8, a11, a16, a17) 
+        function force = call_3(x, fz, ia, a0, a2, a3, a4, a7, a9, a12, a1, a6, a8, a11, a16, a17) 
             C = a0;
             D = fz.*(a1.*fz+a2);
             BCD = a3.*sin(atan(fz./a4).*2);
@@ -36,7 +36,7 @@ classdef lateral_pacejka
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
         % add additional camber terms
-        function force = call_4(x, fz, ia, a0, a2, a3, a4, a7, a12, a9, a1, a6, a8, a11, a16, a17, a15, a5, a10, a13, a14) 
+        function force = call_4(x, fz, ia, a0, a2, a3, a4, a7, a9, a12, a1, a6, a8, a11, a16, a17, a15, a5, a10, a13, a14) 
             C = a0;
             D = fz.*(a1.*fz+a2).*(1-a15*ia.^2);
             BCD = a3.*sin(atan(fz./a4).*2).*(1-a5.*abs(ia));
