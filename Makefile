@@ -22,6 +22,7 @@ get_data:
 plot:
 	jupyter notebook rear_cornering_analysis.ipynb
 
+# converts raw matlab data into processed data for fitting & other usage
 process_tire_data:
 	$(PYTHON) data_processing.py
 

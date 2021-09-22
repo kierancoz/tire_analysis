@@ -3,7 +3,7 @@ clc
 clear
 % requires tire_data repo to be initialized. run 'make get_data' in
 % repo folder to get data. Request access to repo if command fails
-load(fileparts(matlab.desktop.editor.getActiveFilename) + "/../tire_data/processed_data/cornering_2021_rears.mat");
+load(fileparts(matlab.desktop.editor.getActiveFilename) + "/../tire_data/processed_data/cornering_2021_fronts_10x7.mat");
 
 %% DATA FILTERING
 % filter out unwanted pressure and velocities
@@ -86,8 +86,8 @@ fo.Upper = UpperBounds(1:18);
 fo.MaxFunEvals = MaxFunEvals;
 
 % require 1.3 curvature value on final fit
-fo.Upper(1) = 1.3;
-fo.Lower(1) = 1.3;
+%fo.Upper(1) = 1.3;
+%fo.Lower(1) = 1.3;
 
 % fit data
 [fit4,gof4,fitinfo4] = fit([req_SA.' req_FZ.'], req_FY.', f, fo, 'problem', req_IA.');
