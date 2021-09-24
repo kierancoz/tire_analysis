@@ -1,14 +1,14 @@
 classdef long_pacejka
     methods (Static)
-       % with coefficients in normal order
-        function force = long_pacejka_eqn(x, fz, ia, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)
-            C = a0;
-            D = fz.*(a1.*fz+a2).*(1-a15*ia.^2);
-            BCD = a3.*sin(atan(fz./a4).*2).*(1-a5.*abs(ia));
+       % with coefficients in normal order (IA not currently used)
+        function force = long_pacejka_eqn(x, fz, ia, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13)
+            C = b0;
+            D = fz.*(b1.*fz+b2);
+            BCD = (b3.*fz.^2 + b4.*fz).*exp(-b5.*fz);
             B = BCD./(C.*D);
-            H = a8.*fz + a9 + a10.*ia;
-            E = (a6.*fz + a7).*(1 - (a16.*ia + a17).*sign(x + H));
-            V = a11.*fz + a12 + (a13.*fz + a14).*ia.*fz;
+            H = b9.*fz + b10;
+            E = (b6.*fz.^2 + b7.*fz + b8).*(1 - b13.*sign(x + H));
+            V = b11.*fz + b12;
             Bx1 = B.*(x + H);
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
