@@ -12,5 +12,21 @@ classdef long_pacejka
             Bx1 = B.*(x + H);
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
+        function force = call_1(x, fz, ia, b0, b2, b4, b5, b8, b10, b12) 
+            C = b0;
+            D = fz.*b2;
+            BCD = b4.*fz.*exp(-b5.*fz);
+            B = BCD./(C.*D);
+            E = b8;
+            H = b10;
+            V = b12;
+            Bx1 = B.*(x + H);
+            force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
+        end
+        function force = test_1(x, fz, ia, C, d, B, E, H, V) 
+            D = fz.*d;
+            Bx1 = B.*(x + H);
+            force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
+        end
     end
 end

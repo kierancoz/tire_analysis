@@ -25,31 +25,56 @@ end
 
 %% FIT PARAMETERS
 % b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13
-LowerBounds = [1.4 -80 900 -20 100 -1 -0.1 -1 -20 -1 -5 -100 -10 -1];
-UpperBounds = [1.8 80 1700 20 500 1 0.1 1 1 1 5 100 10 1];
-StartingValues = [1.5 0 1100 0 300 0 0 0 -2 0 0 0 0 0];
+LowerBounds = [-Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf];
+UpperBounds = [Inf Inf Inf Inf Inf Inf Inf Inf Inf Inf Inf Inf Inf Inf];
+StartingValues = [15 2.56 0.159 0.36 -22 0 -0.32 0 0 0 0 0 0 0 0 0 0 0];
 MaxIter = 10000;
 MaxFunEvals = 10000;
 
 %% FIT 1
-f = fittype('long_pacejka.long_pacejka_eqn(x, fz, ia, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13)',...
+f = fittype('long_pacejka.test_1(x, fz, ia, C, d, B, E, H, V) ',...
     'independent', {'x', 'fz'}, 'problem', 'ia',...
-    'coefficients', {'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13'});
+    'coefficients', {'C', 'd', 'B', 'E', 'H', 'V'});
 fo = fitoptions(f);
 fo.MaxIter = MaxIter;
-fo.StartPoint = StartingValues(1:14);
-fo.Lower = LowerBounds(1:14);
-fo.Upper = UpperBounds(1:14);
 fo.MaxFunEvals = MaxFunEvals;
 
 [fit1,gof1,fitinfo1] = fit([req_SL.' req_FZ.'], req_FX.', f, fo, 'problem', req_IA.');
 disp("fit1 - standard_dev is: " + gof1.rmse);
 
+%% FIT 1
+% f = fittype('long_pacejka.call_1(x, fz, ia, b0, b2, b4, b5, b8, b10, b12)',...
+%     'independent', {'x', 'fz'}, 'problem', 'ia',...
+%     'coefficients', {'b0', 'b2', 'b4', 'b5', 'b8', 'b10', 'b12'});
+% fo = fitoptions(f);
+% fo.MaxIter = MaxIter;
+% %fo.StartPoint = [StartingValues(1) StartingValues(3) StartingValues(5) StartingValues(6) StartingValues(9) StartingValues(11) StartingValues(13)];
+% %fo.Lower = LowerBounds(1:7);
+% %fo.Upper = UpperBounds(1:7);
+% fo.MaxFunEvals = MaxFunEvals;
+% 
+% [fit1,gof1,fitinfo1] = fit([req_SL.' req_FZ.'], req_FX.', f, fo, 'problem', req_IA.');
+% disp("fit1 - standard_dev is: " + gof1.rmse);
+
+%% FIT 1
+% f = fittype('long_pacejka.long_pacejka_eqn(x, fz, ia, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13)',...
+%     'independent', {'x', 'fz'}, 'problem', 'ia',...
+%     'coefficients', {'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'b13'});
+% fo = fitoptions(f);
+% fo.MaxIter = MaxIter;
+% fo.StartPoint = StartingValues(1:14);
+% fo.Lower = LowerBounds(1:14);
+% fo.Upper = UpperBounds(1:14);
+% fo.MaxFunEvals = MaxFunEvals;
+% 
+% [fit1,gof1,fitinfo1] = fit([req_SL.' req_FZ.'], req_FX.', f, fo, 'problem', req_IA.');
+% disp("fit1 - standard_dev is: " + gof1.rmse);
+
 %% PLOT FIT RESULTS
 plot3(req_SL.', req_FZ.', req_FX.');
 hold on;
 
-mesh_sl = -0.20+.01*(0:40);
+mesh_sl = -0.25+.01*(0:50);
 mesh_fz = -20*(0:60);
 
 [mesh_SL, mesh_FZ] = meshgrid(mesh_sl, mesh_fz);
@@ -58,8 +83,7 @@ mesh_ia = [0, 2, 4];
 fit4 = fit1;
 for i = 1:length(mesh_ia)
     temp_IA = zeros(size(mesh_SL)) + mesh_ia(i);
-    test_y = long_pacejka.long_pacejka_eqn(mesh_SL, mesh_FZ, temp_IA, fit4.b0, fit4.b1,...
-        fit4.b2, fit4.b3, fit4.b4, fit4.b5, fit4.b6, fit4.b7, fit4.b8,...
-        fit4.b9, fit4.b10, fit4.b11, fit4.b12, fit4.b13);
+    test_y = long_pacejka.test_1(mesh_SL, mesh_FZ, temp_IA, fit4.C, fit4.d,...
+        fit4.B, fit4.E, fit4.H, fit4.V);
     surf(mesh_SL, mesh_FZ, test_y);
 end
