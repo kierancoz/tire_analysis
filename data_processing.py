@@ -19,19 +19,34 @@ def main():
 
     output_directory = "tire_data/processed_data/"
 
-    data_map = {"cornering_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
+    data_map = {"cornering_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
                 "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
-                "braking_2021_rears": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run38.mat"],
+                
+                "braking_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run38.mat",
+                "tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run39.mat"],
                 "sweeps" : braking_variable_sweeps, "avg" : False},
-                "cornering_2021_fronts_10x6": {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run20.mat",
-                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run21.mat", "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run22.mat"],
+                
+                "braking_hoosier_r25b_18x6_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run43.mat"],
+                "sweeps" : braking_variable_sweeps, "avg" : False},
+
+                "braking_hoosier_r25b_18x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run41.mat"],
+                "sweeps" : braking_variable_sweeps, "avg" : False},
+                
+                "cornering_hoosier_r25b_16x6_10x6": {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run9.mat",
+                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run10.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True},
-                "cornering_2021_fronts_10x7" : {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run22.mat",
-                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run23.mat", "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run24.mat"],
+                
+                "cornering_hoosier_r25b_16x6_10x7" : {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run12.mat",
+                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run13.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+                
+                "cornering_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run6.mat",
+                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run7.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True} }
 
     for output_name, data_info in data_map.items():
         # load matlab file and convert to pandas df
+        ## NOTEE - if multiple sweeps call the same matlab file, this can cause this to stop working, dont do that
         loaded_data = [sio.loadmat(file_name) for file_name in data_info["data_file_names"]]
         df = data_helpers.import_datas(loaded_data, raw_data = True)
 
