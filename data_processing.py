@@ -19,7 +19,7 @@ def main():
 
     output_directory = "tire_data/processed_data/"
 
-    data_map = {"cornering_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
+    data_map = {"cornering_hoosier_r25b_18x7-5_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
                 "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
                 
                 "cornering_hoosier_r25b_18x6_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run27.mat"],
@@ -37,17 +37,36 @@ def main():
 
                 "braking_hoosier_r25b_18x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run41.mat"],
                 "sweeps" : braking_variable_sweeps, "avg" : False},
+
+                "cornering_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run24.mat",
+                "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run25.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
                 
-                "cornering_hoosier_r25b_16x6_10x6": {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run9.mat",
-                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run10.mat"],
+                "cornering_hoosier_LCO_18x6_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run33.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+
+                "cornering_hoosier_LCO_18x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run31.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+
+                "braking_hoosier_r25b_18x7-5_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run35.mat",
+                "tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run36.mat"],
+                "sweeps" : braking_variable_sweeps, "avg" : False},
+                
+                "braking_hoosier_LCO_18x6_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run47.mat"],
+                "sweeps" : braking_variable_sweeps, "avg" : False},
+
+                "braking_hoosier_LCO_18x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run45.mat"],
+                "sweeps" : braking_variable_sweeps, "avg" : False},
+                
+                "cornering_hoosier_r25b_16x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run9.mat",
+                "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run10.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True},
                 
-                "cornering_hoosier_r25b_16x6_10x7" : {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run12.mat",
-                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run13.mat"],
+                "cornering_hoosier_r25b_16x6_10x7" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run12.mat",
+                "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run13.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True},
                 
-                "cornering_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run6.mat",
-                "tire_data/raw_data/\RunData_Cornering_Matlab_SI_10inch_Round8/B1965run7.mat"],
+                "cornering_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run6.mat",
+                "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run7.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True} }
 
     for output_name, data_info in data_map.items():
