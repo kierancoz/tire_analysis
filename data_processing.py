@@ -22,6 +22,12 @@ def main():
     data_map = {"cornering_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run21.mat",
                 "tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run22.mat"], "sweeps" : cornering_variable_sweeps, "avg": True},
                 
+                "cornering_hoosier_r25b_18x6_10x7": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run27.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+
+                "cornering_hoosier_r25b_18x6_10x6": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_Cornering_Matlab_SI_Round6/B1654run29.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+
                 "braking_hoosier_r25b_18x7-5_10x8": {"data_file_names" : ["tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run38.mat",
                 "tire_data/raw_data/RunData_10inch_DriveBrake_Matlab_SI_Round6/B1654run39.mat"],
                 "sweeps" : braking_variable_sweeps, "avg" : False},
