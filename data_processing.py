@@ -11,6 +11,11 @@ def main():
                     "pressure" : {"sweep" : np.array([8, 10, 12, 14]) * 6.89476, "label" : "P"},
                     "velocity" : {"sweep" : np.array([15, 25, 45]) * 1.60934, "label" : "V"}}
 
+    cornering_camber = {"load" : {"sweep" : np.array([-350, -250, -200, -150, -100, -50]) / 0.224809, "label" : "FZ" },
+                    "camber" : {"sweep" : np.array([0, 2, 4]), "label" : "IA"},
+                    "pressure" : {"sweep" : np.array([8, 10, 12, 14]) * 6.89476, "label" : "P"},
+                    "velocity" : {"sweep" : np.array([15, 25, 45]) * 1.60934, "label" : "V"}}
+
     braking_variable_sweeps = {"load" : {"sweep" : np.array([-250, -200, -150, -50]) / 0.224809, "label" : "FZ" },
                 "camber" : {"sweep" : np.array([0, 2, 4]), "label" : "IA"},
                 "pressure" : {"sweep" : np.array([8, 10, 12, 14]) * 6.89476, "label" : "P"},
@@ -65,8 +70,14 @@ def main():
                 "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run13.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True},
                 
-                "cornering_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run6.mat",
-                "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run7.mat"],
+                "cornering_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run6.mat"],
+                "sweeps" : cornering_variable_sweeps, "avg": True},
+
+                "camber_hoosier_r25b_16x7-5_10x8" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run7.mat"],
+                "sweeps" : cornering_camber, "avg": True},
+                
+                "cornering_hoosier_r25b_16x7-5_10x7" : {"data_file_names" : ["tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run2.mat",
+                "tire_data/raw_data/RunData_Cornering_Matlab_SI_10inch_Round8/B1965run4.mat"],
                 "sweeps" : cornering_variable_sweeps, "avg": True} }
 
     for output_name, data_info in data_map.items():
