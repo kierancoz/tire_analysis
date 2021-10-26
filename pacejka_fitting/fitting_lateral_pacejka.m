@@ -94,7 +94,7 @@ fo.MaxFunEvals = MaxFunEvals;
 disp("fit4 - standard_dev is: " + gof4.rmse);
 
 %% PLOT FIT RESULTS
-%plot3(req_SA.', req_FZ.', req_FY.');
+plot3(req_SA.', req_FZ.', req_FY.');
 hold on;
 
 mesh_sa = -13+0.4*(0:65);
@@ -108,7 +108,7 @@ for i = 1:length(mesh_ia)
     test_y = lateral_pacejka.lateral_pacejka_eqn(mesh_SA, mesh_FZ, temp_IA, fit4.a0, fit4.a1,...
         fit4.a2, fit4.a3, fit4.a4, fit4.a5, fit4.a6, fit4.a7, fit4.a8,...
         fit4.a9, fit4.a10, fit4.a11, fit4.a12, fit4.a13, fit4.a14, fit4.a15, fit4.a16, fit4.a17);
-    %surf(mesh_SA, mesh_FZ, test_y,'FaceAlpha',0.3);
+    surf(mesh_SA, mesh_FZ, test_y,'FaceAlpha',0.3);
 end
 xlabel('Slip Angle (degrees)');
 ylabel('Normal Force (N)');
@@ -116,13 +116,13 @@ zlabel('Lateral Force (N)');
 title('Lateral Force hoosier r25b 18x7-5 10x7 vs IA, NF, SA');
 
 %% TEST PLOT
-mesh_sa = -25+0.4*(0:150);
-normals = -200-200*(0:5);
-hold on
-grid on
-for i = 1:length(normals)
-    test_y = lateral_pacejka.lateral_pacejka_eqn(mesh_sa, normals(i), 0, fit4.a0, fit4.a1,...
-        fit4.a2, fit4.a3, fit4.a4, fit4.a5, fit4.a6, fit4.a7, fit4.a8,...
-        fit4.a9, fit4.a10, fit4.a11, fit4.a12, fit4.a13, fit4.a14, fit4.a15, fit4.a16, fit4.a17);
-    plot(mesh_sa,test_y);
-end
+% mesh_sa = -25+0.4*(0:150);
+% normals = -200-200*(0:5);
+% hold on
+% grid on
+% for i = 1:length(normals)
+%     test_y = lateral_pacejka.lateral_pacejka_eqn(mesh_sa, normals(i), 0, fit4.a0, fit4.a1,...
+%         fit4.a2, fit4.a3, fit4.a4, fit4.a5, fit4.a6, fit4.a7, fit4.a8,...
+%         fit4.a9, fit4.a10, fit4.a11, fit4.a12, fit4.a13, fit4.a14, fit4.a15, fit4.a16, fit4.a17);
+%     plot(mesh_sa,test_y);
+% end

@@ -77,7 +77,7 @@ plot3(req_SL.', req_FZ.', req_FX.');
 hold on;
 
 mesh_sl = -0.25+.01*(0:50);
-mesh_fz = -20*(0:60);
+mesh_fz = -20*(0:120);
 
 [mesh_SL, mesh_FZ] = meshgrid(mesh_sl, mesh_fz);
 mesh_ia = [0, 2, 4];
