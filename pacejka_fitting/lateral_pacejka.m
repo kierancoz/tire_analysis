@@ -11,7 +11,7 @@ classdef lateral_pacejka
             Bx1 = B.*(x + H);
             force = D.*sin(C.* atan(Bx1 - E.*(Bx1 - atan(Bx1)))) + V;
         end
-        % add all aditional load dependent terms
+        % add all additional load dependent terms
         function force = call_2(x, fz, ia, a0, a2, a3, a4, a7, a9, a12, a1, a6, a8, a11) 
             C = a0;
             D = fz.*(a1.*fz+a2);
