@@ -3,7 +3,7 @@ import numpy as np
 import scipy.io as sio
 
 def import_data(data, run_data = False):
-    required_length = len(data["FY"])
+    required_length = len(data["FX"]) # TODO: make more robust
     for x in list(data.keys()):
         if len(data[x]) != required_length:
             # removes unnecessary data
